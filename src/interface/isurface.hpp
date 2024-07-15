@@ -18,6 +18,8 @@ namespace SDL{
         ISurface(SDL_Surface* sdl_surface) : m_surface{sdl_surface} {}
         virtual ~ISurface() = default;
 
+        ISurface(const ISurface& other);
+
         SDL_Surface* GetSDLSurface() const {
             return m_surface;
         }

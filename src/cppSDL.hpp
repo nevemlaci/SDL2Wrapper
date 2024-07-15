@@ -11,10 +11,14 @@
 #include "cppSDLrect.hpp"
 #include "cppSDLsurface.hpp"
 #include <cstdint>
+#include <SDL_image.h>
 
 namespace SDL{
     static constexpr std::uint32_t INIT_EVERYTHING = SDL_INIT_EVERYTHING;
     bool Init(std::uint32_t flags = SDL::INIT_EVERYTHING);
+    namespace IMG{
+        bool Init(int flags = IMG_INIT_PNG | IMG_INIT_JPG);
+    }
     void Quit();
 };
 

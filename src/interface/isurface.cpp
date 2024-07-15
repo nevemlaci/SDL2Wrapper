@@ -23,15 +23,3 @@ bool SDL::ISurface::CopyIn(const SDL::ISurface& source, const std::optional<SDL:
     }
     return e == 0;
 }
-
-/* @TODO should be in WindowSurface
-SDL::ISurface& SDL::ISurface::operator=(const ISurface& other) {
-    assert(m_is_window_surface == true && "Use SDL::Surface::CopyIn() for non-window surfaces!");
-    if(this == &other) {
-        return *this;
-    }
-    SDL_FreeSurface(m_surface);
-    m_surface = other.m_surface;
-    return *this;
-}
-*/

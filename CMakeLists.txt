@@ -32,7 +32,12 @@ add_library(${PROJECT_NAME} STATIC
         src/interface/isurface.hpp
         src/interface/isurface.cpp
         src/cppSDLwindowsurface.cpp
-        src/cppSDLwindowsurface.hpp)
+        src/cppSDLwindowsurface.hpp
+        src/cppSDLrenderer.cpp
+        src/cppSDLrenderer.hpp
+        src/interface/irenderable.hpp
+        src/cppSDLtexture.cpp
+        src/cppSDLtexture.hpp)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 PRIVATE SDL2_image::SDL2_image PRIVATE SDL2_ttf::SDL2_ttf PRIVATE SDL2_mixer::SDL2_mixer)
 

@@ -5,6 +5,7 @@
 #include "cppSDLsurface.hpp"
 
 #include <cassert>
+#include <SDL_image.h>
 
 #include "cppSDLexception.hpp"
 
@@ -26,13 +27,14 @@ SDL::Surface::Surface(int width, int height, int depth, PixelFormat format) :
         throw Exception(SDL_GetError());
     }
 }
-SDL::Surface::Surface(const std::string& path_to_bmp) : ISurface(SDL_LoadBMP(path_to_bmp.c_str())) {
+SDL::Surface::Surface(const std::string& path) : ISurface(IMG_Load(path.c_str())) {
     if(!m_surface) {
         throw Exception(SDL_GetError());
     }
 }
-SDL::Surface::Surface(const Surface& other) : ISurface(nullptr) {
-    if(SDL_BlitSurface(m_surface, nullptr, other.m_surface, nullptr)!=0) {
+SDL::Surface::Surface(const Surface& other) : ISurface(SDL_CreateRGBSurfaceWithFormat(
+    0, other.GetSDLSurface()->w, other.GetSDLSurface()->h, other.GetSDLSurface()->format->BitsPerPixel, other.GetSDLSurface()->format->format)){
+    if(SDL_BlitSurface(other.m_surface, nullptr, m_surface, nullptr)!=0) {
         throw Exception(SDL_GetError());
     }
 
@@ -42,9 +44,9 @@ SDL::Surface::~Surface() {
     SDL_FreeSurface(m_surface);
 }
 
-bool SDL::Surface::LoadBMP(const std::string& path_to_bmp) {
+bool SDL::Surface::Load(const std::string& path_to_bmp) {
     SDL_FreeSurface(m_surface);
-    m_surface = SDL_LoadBMP(path_to_bmp.c_str());
-    return static_cast<bool>(m_surface);
+    m_surface = IMG_Load(path_to_bmp.c_str());
+    return m_surface != nullptr;
 }
 
