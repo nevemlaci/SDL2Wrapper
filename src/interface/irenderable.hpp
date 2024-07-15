@@ -7,6 +7,7 @@
 
 namespace SDL{
 
+
     class IRenderable{
     protected:
         SDL_Texture* m_texture = nullptr;

@@ -13,7 +13,7 @@ void SurfaceExample(){
         bool should_be_running = true;
         SDL::Window window("Software rendering with surfaces and blit - Example", 800, 600, SDL_WINDOW_RESIZABLE);
         SDL::Surface surface("../test/test.bmp");
-        SDL::Surface surface2(surface);
+        SDL::Surface surface2(surface); //copy ctor test
         SDL::Surface bg("../test/back.bmp");
         std::cout << SDL_GetError();
         SDL::Event event;
@@ -40,11 +40,11 @@ void SurfaceExample(){
                 SDL::Rect{0, 0, 50, 50},
                 SDL::Rect{10, 10, 50, 50});
 
-            /*
+
             window.GetSurface().CopyIn(surface2,
                 SDL::Rect{0, 0, 50, 50},
-                SDL::Rect{100, 100, 70, 60});
-            */
+                SDL::Rect{100, 100, 400, 80});
+
             window.UpdateSurface();
 
         }

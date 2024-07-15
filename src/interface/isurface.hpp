@@ -11,6 +11,8 @@
 namespace SDL{
 
     struct SurfaceSizeData;
+
+    //Interface for Surface objects. Can be initialized by a primitive SDL_Surface*
     class ISurface{
     protected:
         SDL_Surface* m_surface;

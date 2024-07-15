@@ -10,11 +10,8 @@
 namespace SDL{
     class Renderer;
     class Texture : public IRenderable{
-    private:
-        SDL_Texture* m_texture;
     public:
         Texture(const Surface& surface, const Renderer& renderer);
         Texture(const std::string& path, const Renderer& renderer);
-
     };
 }

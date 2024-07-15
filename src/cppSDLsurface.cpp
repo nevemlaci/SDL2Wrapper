@@ -37,7 +37,6 @@ SDL::Surface::Surface(const Surface& other) : ISurface(SDL_CreateRGBSurfaceWithF
     if(SDL_BlitSurface(other.m_surface, nullptr, m_surface, nullptr)!=0) {
         throw Exception(SDL_GetError());
     }
-
 }
 
 SDL::Surface::~Surface() {
