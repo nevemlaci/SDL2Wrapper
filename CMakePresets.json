@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 5,
   "configurePresets": [
     {
       "name": "default",
@@ -7,6 +7,128 @@
       "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
         "CMAKE_TOOLCHAIN_FILE": "external/vcpkg/scripts/buildsystems/vcpkg.cmake"
+      }
+    },
+    {
+      "name": "msvc",
+      "inherits": "default",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "cl",
+        "CMAKE_CXX_COMPILER": "cl",
+        "VCPKG_TARGET_TRIPLET": "x64-windows-static-md"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "enableMicrosoftCodeAnalysis": true,
+          "intelliSenseMode": "windows-msvc-x64"
+        }
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "displayName": "MSVC Debug",
+      "name": "msvc-debug",
+      "inherits": "msvc",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "displayName": "MSVC Release",
+      "name": "msvc-release",
+      "inherits": "msvc",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "displayName": "MSVC RelWithDebInfo",
+      "name": "msvc-relwdebinfo",
+      "inherits": "msvc",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    },
+    {
+      "name": "mingw",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++",
+        "VCPKG_TARGET_TRIPLET": "x64-MinGW"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "displayName": "GCC Debug",
+      "name": "mingw-debug",
+      "inherits": "mingw",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "displayName": "GCC Release",
+      "name": "mingw-release",
+      "inherits": "mingw",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "displayName": "GCC RelWithDebInfo",
+      "name": "mingw-relwdebinfo",
+      "inherits": "mingw",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    },
+    {
+      "name": "gcc",
+      "inherits": "default",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++",
+        "VCPKG_TARGET_TRIPLET": "x64-linux"
+      },
+      "condition": {
+        "type": "notEquals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "displayName": "GCC Debug",
+      "name": "gcc-debug",
+      "inherits": "gcc",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "displayName": "GCC Release",
+      "name": "gcc-release",
+      "inherits": "gcc",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "displayName": "GCC RelWithDebInfo",
+      "name": "gcc-relwdebinfo",
+      "inherits": "gcc",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
       }
     }
   ]
