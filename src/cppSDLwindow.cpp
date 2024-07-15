@@ -3,6 +3,9 @@
 //
 
 #include "cppSDLwindow.hpp"
+
+#include <iostream>
+
 SDL::Window::Window(const std::string& title, int w, int h, WindowFlags flags) :
     m_window(SDL_CreateWindow(
     title.c_str(),
@@ -43,6 +46,7 @@ int SDL::Window::GetDisplayOfWindow() const {
 
 void SDL::Window::UpdateSurface() const {
     SDL_UpdateWindowSurface(m_window);
+    std::cout << "Updated Window surface\n";
     m_surface = SDL::Surface(SDL_GetWindowSurface(m_window));
 }
 

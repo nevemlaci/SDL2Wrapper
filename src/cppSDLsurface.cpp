@@ -4,9 +4,11 @@
 
 #include "cppSDLsurface.hpp"
 
+#include <cassert>
+
 #include "cppSDLexception.hpp"
 
-SDL::Surface::Surface(SDL_Surface* sdl_surface) : m_surface{sdl_surface} {
+SDL::Surface::Surface(SDL_Surface* sdl_surface, bool is_window_surface) : m_surface{sdl_surface}, m_is_window_surface{is_window_surface} {
 
 }
 
@@ -26,7 +28,11 @@ SDL::Surface::Surface(const Surface& other) : m_surface(nullptr) {
 }
 
 SDL::Surface::~Surface() {
-    SDL_FreeSurface(m_surface);
+    if(!m_is_window_surface) SDL_FreeSurface(m_surface);
+}
+
+SDL::SurfaceSizeData SDL::Surface::GetSize() const {
+    return SDL::SurfaceSizeData{m_surface->w, m_surface->h};
 }
 
 bool SDL::Surface::LoadBMP(const std::string& path_to_bmp) {
@@ -51,10 +57,11 @@ bool SDL::Surface::CopyIn(const SDL::Surface& source, const std::optional<SDL::R
 }
 
 SDL::Surface& SDL::Surface::operator=(const Surface& other) {
+    assert(m_is_window_surface == true && "Use SDL::Surface::CopyIn() for non-window surfaces!");
     if(this == &other) {
         return *this;
     }
     SDL_FreeSurface(m_surface);
-    CopyIn(other.m_surface);
+    m_surface = other.m_surface;
     return *this;
 }
