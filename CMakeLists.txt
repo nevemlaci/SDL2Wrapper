@@ -12,7 +12,12 @@ add_definitions(-DSDL_MAIN_HANDLED)
 
 add_library(SDLWrap2 STATIC
         src/cppSDL.cpp
-        src/cppSDL.hpp)
+        src/cppSDL.hpp
+        src/cppSDLexception.hpp
+        src/cppSDLevent.cpp
+        src/cppSDLevent.hpp
+        src/cppSDLwindow.cpp
+        src/cppSDLwindow.hpp)
 
 target_link_libraries(SDLWrap2 PRIVATE SDL2::SDL2 PRIVATE SDL2_image::SDL2_image PRIVATE SDL2_ttf::SDL2_ttf PRIVATE SDL2_mixer::SDL2_mixer)
 
