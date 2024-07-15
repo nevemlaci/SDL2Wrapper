@@ -40,6 +40,7 @@ void SurfaceExample(){
                 SDL::Rect{0, 0, 50, 50},
                 SDL::Rect{10, 10, 50, 50});
 
+
             window.GetSurface().CopyIn(surface2,
                 SDL::Rect{0, 0, 50, 50},
                 SDL::Rect{100, 100, 400, 80});
