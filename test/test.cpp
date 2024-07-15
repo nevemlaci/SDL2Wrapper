@@ -6,17 +6,16 @@
 
 #include "../src/cppSDL.hpp"
 
-#define SURFACEEXAMPLE
-
 void SurfaceExample(){
     SDL::Init();
     {
         bool should_be_running = true;
-        SDL::Window window("Test", 800, 600, SDL_WINDOW_RESIZABLE);
+        SDL::Window window("Software rendering with surfaces and blit - Example", 800, 600, SDL_WINDOW_RESIZABLE);
         SDL::Surface surface("../test/test.bmp");
         SDL::Surface bg("../test/back.bmp");
         std::cout << SDL_GetError();
         SDL::Event event;
+        surface.SaveBMP("../test/test_save_surface.bmp");
         while (true) {
             while(event.Poll()) {
                 switch (event.GetType()) {
@@ -43,13 +42,10 @@ void SurfaceExample(){
 
         }
     }
-
-    SDL_Quit();
+    SDL::Quit();
 }
 
 int main(int argc, char** argv){
-#ifdef SURFACEEXAMPLE
     SurfaceExample();
-#endif
     return 0;
 }

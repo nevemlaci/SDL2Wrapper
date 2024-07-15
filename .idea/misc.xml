@@ -11,8 +11,8 @@
     <sourceRoots>
       <file path="$PROJECT_DIR$/src" />
     </sourceRoots>
-    <libraryRoots>
+    <excludeRoots>
       <file path="$PROJECT_DIR$/external" />
-    </libraryRoots>
+    </excludeRoots>
   </component>
 </project>
