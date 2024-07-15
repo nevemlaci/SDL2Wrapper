@@ -7,7 +7,6 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 endif ()
 
 
-
 if(NOT DEFINED ADDEXE)
     set(ADDEXE OFF)
 endif (NOT DEFINED ADDEXE)
@@ -29,7 +28,11 @@ add_library(${PROJECT_NAME} STATIC
         src/cppSDLwindow.hpp
         src/cppSDLsurface.cpp
         src/cppSDLsurface.hpp
-        src/cppSDLrect.hpp)
+        src/cppSDLrect.hpp
+        src/interface/isurface.hpp
+        src/interface/isurface.cpp
+        src/cppSDLwindowsurface.cpp
+        src/cppSDLwindowsurface.hpp)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 PRIVATE SDL2_image::SDL2_image PRIVATE SDL2_ttf::SDL2_ttf PRIVATE SDL2_mixer::SDL2_mixer)
 

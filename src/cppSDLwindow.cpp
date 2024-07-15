@@ -13,7 +13,9 @@ SDL::Window::Window(const std::string& title, int w, int h, WindowFlags flags) :
         SDL_WINDOWPOS_CENTERED,
         w,
         h,
-        flags)) {}
+        flags)),
+        m_surface(SDL::WindowSurface(*this))
+{}
 SDL::Window::Window(const std::string& title, int x, int y, int w, int h, WindowFlags flags) :
     m_window(SDL_CreateWindow(
     title.c_str(),
@@ -21,7 +23,9 @@ SDL::Window::Window(const std::string& title, int x, int y, int w, int h, Window
         y,
         w,
         h,
-        flags)) {}
+        flags)),
+        m_surface(SDL::WindowSurface(*this))
+{}
 
 SDL::Window::~Window() {
     SDL_DestroyWindow(m_window);
@@ -44,9 +48,13 @@ int SDL::Window::GetDisplayOfWindow() const {
     return SDL_GetWindowDisplayIndex(m_window);
 }
 
-void SDL::Window::UpdateSurface() const {
+void SDL::Window::UpdateSurface() {
     SDL_UpdateWindowSurface(m_window);
-    m_surface = SDL::Surface(SDL_GetWindowSurface(m_window));
+    m_surface = SDL::WindowSurface(*this);
+}
+
+SDL::WindowSurface& SDL::Window::GetSurface() {
+    return m_surface;
 }
 
 SDL::WindowPositionData SDL::Window::GetPosition() const {

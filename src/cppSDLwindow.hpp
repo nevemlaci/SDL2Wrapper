@@ -6,7 +6,7 @@
 #include <SDL2/SDL.h>
 #include <string>
 #include <cstdint>
-#include "cppSDLsurface.hpp"
+#include "cppSDLwindowsurface.hpp"
 
 namespace SDL{
     using WindowFlags = std::uint32_t; //Reference: https://wiki.libsdl.org/SDL2/SDL_WindowFlags
@@ -15,7 +15,7 @@ namespace SDL{
     class Window{
     private:
         SDL_Window* m_window;
-        mutable SDL::Surface m_surface = SDL::Surface(SDL_GetWindowSurface(m_window));
+        SDL::WindowSurface m_surface;
     public:
         /**
          * @brief Create a window with the specified dimensions at the center of the screen, with the specified flags.
@@ -49,14 +49,9 @@ namespace SDL{
 
         int GetDisplayOfWindow() const;
 
-        void UpdateSurface() const;
+        void UpdateSurface();
 
-        SDL::Surface& GetSurface(bool update = false) const{
-            if(update) {
-                UpdateSurface();
-            }
-            return m_surface;
-        }
+        SDL::WindowSurface& GetSurface();
 
     };
 
