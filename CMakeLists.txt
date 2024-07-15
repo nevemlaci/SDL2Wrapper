@@ -1,4 +1,8 @@
 cmake_minimum_required(VERSION 3.25)
+
+set(CMAKE_C_COMPILER_WORKS 1)
+set(CMAKE_CXX_COMPILER_WORKS 1)
+
 project(cppSDL)
 
 set(CMAKE_CXX_STANDARD 26)
