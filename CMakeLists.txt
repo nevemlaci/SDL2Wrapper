@@ -19,7 +19,8 @@ add_library(SDLWrap2 STATIC
         src/cppSDLwindow.cpp
         src/cppSDLwindow.hpp
         src/cppSDLsurface.cpp
-        src/cppSDLsurface.hpp)
+        src/cppSDLsurface.hpp
+        src/cppSDLrect.hpp)
 
 target_link_libraries(SDLWrap2 PRIVATE SDL2::SDL2 PRIVATE SDL2_image::SDL2_image PRIVATE SDL2_ttf::SDL2_ttf PRIVATE SDL2_mixer::SDL2_mixer)
 

@@ -5,7 +5,7 @@
 
 #include "cppSDL.hpp"
 
-bool SDL::Init(uint32_t flags) {
+bool SDL::Init(std::uint32_t flags) {
     return SDL_Init(flags) == 0;
 }
 

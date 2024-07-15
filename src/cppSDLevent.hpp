@@ -4,13 +4,14 @@
 
 #pragma once
 #include <SDL2/SDL.h>
+#include <cstdint>
 
 namespace SDL{
     class Event final{
         SDL_Event m_event{};
     public:
         Event() = default;
-        uint32_t GetType() const {
+        std::uint32_t GetType() const {
             return m_event.type;
         }
 

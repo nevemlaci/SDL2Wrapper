@@ -41,6 +41,11 @@ int SDL::Window::GetDisplayOfWindow() const {
     return SDL_GetWindowDisplayIndex(m_window);
 }
 
+void SDL::Window::UpdateSurface() const {
+    SDL_UpdateWindowSurface(m_window);
+    m_surface = SDL::Surface(SDL_GetWindowSurface(m_window));
+}
+
 SDL::WindowPositionData SDL::Window::GetPosition() const {
     int x, y;
     SDL_GetWindowPosition(m_window, &x, &y);

@@ -5,14 +5,17 @@
 #pragma once
 #include <SDL2/SDL.h>
 #include <string>
+#include <cstdint>
+#include "cppSDLsurface.hpp"
 
 namespace SDL{
-    using WindowFlags = uint32_t; //Reference: https://wiki.libsdl.org/SDL2/SDL_WindowFlags
+    using WindowFlags = std::uint32_t; //Reference: https://wiki.libsdl.org/SDL2/SDL_WindowFlags
     struct WindowSizeData;
     struct WindowPositionData;
     class Window{
     private:
         SDL_Window* m_window;
+        mutable SDL::Surface m_surface = SDL::Surface(SDL_GetWindowSurface(m_window));
     public:
         /**
          * @brief Create a window with the specified dimensions at the center of the screen, with the specified flags.
@@ -45,6 +48,16 @@ namespace SDL{
         SDL_Window* GetSDLWindow() const { return m_window; }
 
         int GetDisplayOfWindow() const;
+
+        void UpdateSurface() const;
+
+        SDL::Surface& GetSurface(bool update = false) const{
+            if(update) {
+                UpdateSurface();
+            }
+            return m_surface;
+        }
+
     };
 
     struct WindowSizeData final{

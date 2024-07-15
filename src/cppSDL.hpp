@@ -8,10 +8,13 @@
 #include "cppSDLevent.hpp"
 #include "cppSDLwindow.hpp"
 #include "cppSDLexception.hpp"
+#include "cppSDLrect.hpp"
+#include "cppSDLsurface.hpp"
+#include <cstdint>
 
 namespace SDL{
-    static constexpr uint32_t INIT_EVERYTHING = SDL_INIT_EVERYTHING;
-    bool Init(uint32_t flags = SDL::INIT_EVERYTHING);
+    static constexpr std::uint32_t INIT_EVERYTHING = SDL_INIT_EVERYTHING;
+    bool Init(std::uint32_t flags = SDL::INIT_EVERYTHING);
     void Quit();
 };
 
