@@ -46,7 +46,6 @@ int SDL::Window::GetDisplayOfWindow() const {
 
 void SDL::Window::UpdateSurface() const {
     SDL_UpdateWindowSurface(m_window);
-    std::cout << "Updated Window surface\n";
     m_surface = SDL::Surface(SDL_GetWindowSurface(m_window));
 }
 

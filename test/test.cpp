@@ -17,19 +17,12 @@ void SurfaceExample(){
         SDL::Surface bg("../test/back.bmp");
         std::cout << SDL_GetError();
         SDL::Event event;
-        bool windowresized = false;
         while (true) {
-            windowresized = false;
             while(event.Poll()) {
                 switch (event.GetType()) {
                     case SDL_QUIT:
                         should_be_running = false;
                         break;
-                    case SDL_WINDOWEVENT_RESIZED:
-                        windowresized = true;
-                        break;
-                    case SDL_WINDOWEVENT_SIZE_CHANGED:
-                        windowresized = true;
                     default:
                         break;
                 }
@@ -37,13 +30,6 @@ void SurfaceExample(){
             }
 
             if(!should_be_running) break;
-
-
-            if(windowresized) {
-                window.UpdateSurface();
-            }
-
-
 
             window.GetSurface().CopyIn(bg,
                 SDL::Rect{0, 0, bg.GetSize().w, bg.GetSize().h},
