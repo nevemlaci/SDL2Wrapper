@@ -12,12 +12,12 @@ void SurfaceExample(){
     {
         bool should_be_running = true;
         SDL::Window window("Software rendering with surfaces and blit - Example", 800, 600, SDL_WINDOW_RESIZABLE);
-        SDL::Surface surface("../test/test.bmp");
+        SDL::Surface surface("test.bmp");
         SDL::Surface surface2(surface); //copy ctor test
-        SDL::Surface bg("../test/back.bmp");
+        SDL::Surface bg("back.bmp");
         std::cout << SDL_GetError();
         SDL::Event event;
-        if(!surface.SaveBMP("../test/test_save_surface.bmp")) SDL_GetError();
+        if(!surface.SaveBMP("test_save_surface.bmp")) SDL_GetError();
         while (true) {
             while(event.Poll()) {
                 switch (event.GetType()) {

@@ -50,7 +50,8 @@
       "inherits": "default",
       "generator": "Visual Studio 17 2022",
       "cacheVariables": {
-        "VCPKG_TARGET_TRIPLET": "x64-windows"
+        "VCPKG_TARGET_TRIPLET": "x64-windows",
+        "RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/build/${presetName}_build"
       },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {

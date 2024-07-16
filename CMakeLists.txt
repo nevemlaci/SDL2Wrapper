@@ -22,6 +22,8 @@ find_package(SDL2_mixer REQUIRED)
 
 add_definitions(-DSDL_MAIN_HANDLED)
 
+set(out_dir ${CMAKE_BINARY_DIR}/out )
+
 add_library(${PROJECT_NAME} STATIC
         src/cppSDL.cpp
         src/cppSDL.hpp
@@ -43,10 +45,25 @@ add_library(${PROJECT_NAME} STATIC
         src/cppSDLtexture.cpp
         src/cppSDLtexture.hpp)
 
+
+set_target_properties( ${PROJECT_NAME} PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${out_dir} )
+set_target_properties( ${PROJECT_NAME} PROPERTIES ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${out_dir} )
+set_target_properties( ${PROJECT_NAME} PROPERTIES ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${out_dir} )
+
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 PRIVATE SDL2_image::SDL2_image PRIVATE SDL2_ttf::SDL2_ttf PRIVATE SDL2_mixer::SDL2_mixer)
 
-if(ADDEXE)
-    add_executable(Test test/test.cpp)
+file(GLOB resource_files "test.bmp" "back.bmp")
+file(COPY ${resource_files} DESTINATION ${out_dir})
 
-    target_link_libraries(Test PRIVATE ${PROJECT_NAME} PRIVATE SDL2::SDL2 PRIVATE SDL2_image::SDL2_image PRIVATE SDL2_ttf::SDL2_ttf PRIVATE SDL2_mixer::SDL2_mixer)
+message(${CMAKE_BINARY_DIR}/$<CONFIG>)
+
+if(ADDEXE)
+    add_executable(${PROJECT_NAME}Test test/test.cpp)
+
+    set_target_properties( ${PROJECT_NAME}Test PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${out_dir} )
+    set_target_properties( ${PROJECT_NAME}Test PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${out_dir} )
+    set_target_properties( ${PROJECT_NAME}Test PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${out_dir} )
+
+
+    target_link_libraries(${PROJECT_NAME}Test PRIVATE ${PROJECT_NAME} PRIVATE SDL2::SDL2 PRIVATE SDL2_image::SDL2_image PRIVATE SDL2_ttf::SDL2_ttf PRIVATE SDL2_mixer::SDL2_mixer)
 endif (ADDEXE)
