@@ -7,6 +7,7 @@ Prerequisited: cmake, Ninja or Visual Studio 17 2022, a C/C++ compiler(MSVC, Min
 ```
 git clone https://github.com/nevemlaci/cppSDL2
 cd cppSDL2
+py ./bootstrap.py
 cmake -S . --preset=<preset-name>
 cmake --build build/<preset-name>_build
 ```
