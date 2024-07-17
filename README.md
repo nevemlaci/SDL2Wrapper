@@ -34,3 +34,19 @@ gcc-linux-debug
 gcc-linux-release
 gcc-linux-relwithdebinfo
 ```
+
+## Installing
+After building:
+```
+cmake --install build/<preset-name>_build
+```
+
+In your CMakeList.txt:
+
+```
+find_package(cppSDL REQUIRED)
+add_executable(MyExe main.cpp)
+target_link_libraries(MyExe PRIVATE cppSDL::cppSDL)
+```
+
+You should also link SDL2, SDL2_image, SDL2_ttf, SDL2_mixer in some way. I recommend [setting up vcpkg](https://learn.microsoft.com/en-us/vcpkg/users/buildsystems/cmake-integration) to get the dependencies for you. You can check the vcpkg setup of this repo for reference aswell.
