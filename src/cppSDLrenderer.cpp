@@ -16,3 +16,8 @@ SDL::Renderer::Renderer(const Window& window, int driver, RenderFlags flags) :
 SDL::Renderer::~Renderer() {
     SDL_DestroyRenderer(m_renderer);
 }
+
+void SDL::Renderer::RenderCopy(IRenderable& rendered_context, std::optional<Rect> srcrect, std::optional<Rect> dstrect,
+double angle, Point center, FlipMode flip_mode) {
+    SDL_RenderCopyEx(m_renderer, rendered_context.GetSDLTexture(), srcrect ? &srcrect.value() : nullptr, dstrect ? &dstrect.value() : nullptr, angle, &center, flip_mode);
+}
