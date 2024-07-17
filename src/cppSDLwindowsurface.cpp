@@ -4,8 +4,8 @@
 
 #include "cppSDLwindowsurface.hpp"
 
-#include "cppSDLwindow.hpp"
-SDL::WindowSurface::WindowSurface(const Window& window) : ISurface(SDL_GetWindowSurface(window.GetSDLWindow())) {}
+#include "cppSDLswindow.hpp"
+SDL::WindowSurface::WindowSurface(const SWindow& window) : ISurface(SDL_GetWindowSurface(window.GetSDLWindow())) {}
 SDL::WindowSurface::~WindowSurface() {}
 
 SDL::WindowSurface& SDL::WindowSurface::operator=(const WindowSurface& other) {

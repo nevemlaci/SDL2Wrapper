@@ -25,13 +25,7 @@ add_definitions(-DSDL_MAIN_HANDLED)
 file(GLOB resource_files "test.bmp" "back.bmp")
 
 
-if(MSVC)
-    file(COPY ${resource_files} DESTINATION ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE})
-    message("Copying resource files to: ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}")
-else()
-    file(COPY ${resource_files} DESTINATION ${CMAKE_BINARY_DIR})
-    message("Copying resource files to: ${CMAKE_BINARY_DIR}")
-endif ()
+
 
 add_library(${PROJECT_NAME} STATIC
         src/cppSDL.cpp
@@ -39,8 +33,8 @@ add_library(${PROJECT_NAME} STATIC
         src/cppSDLexception.hpp
         src/cppSDLevent.cpp
         src/cppSDLevent.hpp
-        src/cppSDLwindow.cpp
-        src/cppSDLwindow.hpp
+        src/cppSDLswindow.cpp
+        src/cppSDLswindow.hpp
         src/cppSDLsurface.cpp
         src/cppSDLsurface.hpp
         src/cppSDLrect.hpp
@@ -53,11 +47,24 @@ add_library(${PROJECT_NAME} STATIC
         src/interface/irenderable.hpp
         src/cppSDLtexture.cpp
         src/cppSDLtexture.hpp
-        src/cppSDLConcepts.hpp)
+        src/cppSDLConcepts.hpp
+        src/interface/iwindow.cpp
+        src/interface/iwindow.hpp
+        src/cppSDLrwindow.cpp
+        src/cppSDLrwindow.hpp
+)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 PRIVATE SDL2_image::SDL2_image PRIVATE SDL2_ttf::SDL2_ttf PRIVATE SDL2_mixer::SDL2_mixer)
 
-if(ADDEXE)
+if(ADDEXE) #only here for testing should make it a different project entirely
+    if(MSVC)
+        file(COPY ${resource_files} DESTINATION ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE})
+        message("Copying resource files to: ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}")
+    else()
+        file(COPY ${resource_files} DESTINATION ${CMAKE_BINARY_DIR})
+        message("Copying resource files to: ${CMAKE_BINARY_DIR}")
+    endif ()
+
     add_executable(${PROJECT_NAME}Test test/test.cpp)
 
     target_link_libraries(${PROJECT_NAME}Test PRIVATE ${PROJECT_NAME} PRIVATE SDL2::SDL2 PRIVATE SDL2_image::SDL2_image PRIVATE SDL2_ttf::SDL2_ttf PRIVATE SDL2_mixer::SDL2_mixer)

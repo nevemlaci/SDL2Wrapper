@@ -11,7 +11,7 @@ void SurfaceExample(){
     SDL::IMG::Init();
     {
         bool should_be_running = true;
-        SDL::Window window("Software rendering with surfaces and blit - Example", 800, 600, SDL_WINDOW_RESIZABLE);
+        SDL::SWindow window("Software rendering with surfaces and blit - Example", 800, 600, SDL_WINDOW_RESIZABLE);
         SDL::Surface surface("test.bmp");
         SDL::Surface surface2(surface); //copy ctor test
         SDL::Surface bg("back.bmp");
@@ -52,7 +52,46 @@ void SurfaceExample(){
     SDL::Quit();
 }
 
+
+void RenderAPIExample() {
+    SDL::Init();
+    SDL::IMG::Init();
+    {
+        bool should_be_running = true;
+        SDL::RWindow window("SDL2 Rendering API - Example", 800, 600, SDL_WINDOW_RESIZABLE);
+        SDL::Renderer renderer(window);
+        SDL::Texture texture("test.bmp", renderer);
+        SDL::Texture bg("back.bmp", renderer);
+        SDL::Event event;
+        while (should_be_running) {
+            while (event.Poll()) {
+                std::cout << "a\n";
+                switch (event.GetType()) {
+                    case SDL_QUIT:
+                        should_be_running = false;
+                    break;
+                    default:
+                        break;
+                }
+                if(!should_be_running) break;
+            }
+            if(!should_be_running) break;
+
+        renderer.RenderClear();
+
+        renderer.RenderCopy(bg,
+                    {},
+                    SDL::Rect{0, 0, window.GetSize().w, window.GetSize().h});
+
+        renderer.RenderCopy(texture, {}, SDL::Rect{0, 0, 50, 50});
+
+        renderer.RenderPresent();
+        }
+    }
+    SDL::Quit();
+}
 int main(int argc, char** argv){
-    SurfaceExample();
+    //SurfaceExample();
+    RenderAPIExample();
     return 0;
 }
