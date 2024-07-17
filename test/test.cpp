@@ -52,7 +52,6 @@ void SurfaceExample(){
     SDL::Quit();
 }
 
-
 void RenderAPIExample() {
     SDL::Init();
     SDL::IMG::Init();
@@ -61,11 +60,11 @@ void RenderAPIExample() {
         SDL::RWindow window("SDL2 Rendering API - Example", 800, 600, SDL_WINDOW_RESIZABLE);
         SDL::Renderer renderer(window);
         SDL::Texture texture("test.bmp", renderer);
+        SDL::Texture texture2(texture);
         SDL::Texture bg("back.bmp", renderer);
         SDL::Event event;
         while (should_be_running) {
             while (event.Poll()) {
-                std::cout << "a\n";
                 switch (event.GetType()) {
                     case SDL_QUIT:
                         should_be_running = false;
@@ -77,19 +76,22 @@ void RenderAPIExample() {
             }
             if(!should_be_running) break;
 
-        renderer.RenderClear();
+            renderer.RenderClear();
 
-        renderer.RenderCopy(bg,
-                    {},
-                    SDL::Rect{0, 0, window.GetSize().w, window.GetSize().h});
+            renderer.RenderCopy(bg,
+                        {},
+                        SDL::Rect{0, 0, window.GetSize().w, window.GetSize().h});
 
-        renderer.RenderCopy(texture, {}, SDL::Rect{0, 0, 50, 50});
+            renderer.RenderCopy(texture, {}, SDL::Rect{0, 0, 50, 50});
 
-        renderer.RenderPresent();
+            renderer.RenderCopy(texture2, {}, SDL::Rect{80, 200, 100, 30});
+
+            renderer.RenderPresent();
         }
     }
     SDL::Quit();
 }
+
 int main(int argc, char** argv){
     //SurfaceExample();
     RenderAPIExample();

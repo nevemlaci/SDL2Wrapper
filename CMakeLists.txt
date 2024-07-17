@@ -52,6 +52,7 @@ add_library(${PROJECT_NAME} STATIC
         src/interface/iwindow.hpp
         src/cppSDLrwindow.cpp
         src/cppSDLrwindow.hpp
+        src/interface/irenderable.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 PRIVATE SDL2_image::SDL2_image PRIVATE SDL2_ttf::SDL2_ttf PRIVATE SDL2_mixer::SDL2_mixer)

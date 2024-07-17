@@ -6,10 +6,20 @@
 
 #include "cppSDLexception.hpp"
 #include "cppSDLrwindow.hpp"
+void SDL::Renderer::test_render_to_textures() {
+    SDL_RendererInfo info;
+    SDL_GetRendererInfo(m_renderer, &info);
+    if(!(info.flags | SDL_RENDERER_TARGETTEXTURE)) {
+        can_render_to_textures = false;
+    }
+    can_render_to_textures =  true;
+}
+
 SDL::Renderer::Renderer(const RWindow& window, RenderFlags flags) :
     m_renderer(SDL_CreateRenderer(
         window.GetSDLWindow(),
         -1, flags)) {
+    test_render_to_textures();
     if(!m_renderer) {
         throw Exception(SDL_GetError());
     }
@@ -17,7 +27,12 @@ SDL::Renderer::Renderer(const RWindow& window, RenderFlags flags) :
 SDL::Renderer::Renderer(const RWindow& window, int driver, RenderFlags flags) :
     m_renderer(SDL_CreateRenderer(
         window.GetSDLWindow(),
-        driver, flags)) {}
+        driver, flags)) {
+    if(!m_renderer) {
+        throw Exception(SDL_GetError());
+    }
+    test_render_to_textures();
+}
 
 SDL::Renderer::~Renderer() {
     SDL_DestroyRenderer(m_renderer);

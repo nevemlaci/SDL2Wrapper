@@ -15,5 +15,8 @@ namespace SDL{
         IRenderable(SDL_Texture* texture) : m_texture(texture) {}
         SDL_Texture* GetSDLTexture() const { return m_texture; }
         virtual ~IRenderable() = default;
+
+        IRenderable(const IRenderable& other);
     };
+
 }

@@ -17,10 +17,17 @@ namespace SDL{
     class RWindow;
     class Renderer{
         SDL_Renderer* m_renderer;
+        bool can_render_to_textures = false;
+
+        void test_render_to_textures();
     public:
         explicit Renderer(const RWindow& window, RenderFlags flags = 0);
         Renderer(const RWindow& window, int driver, RenderFlags flags = 0);
         ~Renderer();
+
+        bool CanRenderToTextures() const {
+            return can_render_to_textures;
+        }
 
         SDL_Renderer* GetSDLRenderer() const {
             return m_renderer;
